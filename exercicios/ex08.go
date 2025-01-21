@@ -1,12 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	var number int
+	var stringNumber string
+	var erro error
+	var intNumber int
 	fmt.Println("Digite um número positivo e maior que 1: ")
-	fmt.Scan(&number)
-	fmt.Print("O resultado é: ", fat(number))
+	fmt.Scan(&stringNumber)
+
+	intNumber, erro = strconv.Atoi(stringNumber)
+
+	for erro != nil || intNumber <= 0 {
+		fmt.Println("Erro, digite um número inteiro e positivo.")
+		fmt.Scan(&stringNumber)
+		intNumber, erro = strconv.Atoi(stringNumber)
+	}
+
+	fmt.Print("O resultado é: ", fat(intNumber))
 }
 
 func fat(number int) int {
